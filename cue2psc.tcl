@@ -139,7 +139,7 @@ for { set i 0 } { $i < [llength $tracklist] } { incr i } {
 		set this_title [string range $this_title [expr [string first " - " $this_title] +3] end]
 	}
 	
-	set trackobject [list $this_starttime $this_artist $this_title]
+	set trackobject [list $this_starttime [string trim $this_artist] [string trim $this_title]]
 	
 	lappend trackarray $trackobject
 		
