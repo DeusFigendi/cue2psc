@@ -134,6 +134,24 @@ for { set i 0 } { $i < [llength $tracklist] } { incr i } {
 	}
 	set this_starttime [regexp -inline -all {\d+} $this_starttime]
 	
+	# should be an array of…
+	# { minutes seconds frames }
+	# calculate to
+	# { hours minutes seconds milliseconds }
+	
+	set this_hour 0
+	set this_minutes [lindex $this_starttime 0]
+	set this_seconds [lindex $this_starttime 1]
+	set this_milliseconds [expr round ([lindex $this_starttime 2] / 0.075)]
+	
+	while { $this_minutes >= 60 } {
+		incr this_hour
+		incr this_minutes -60
+	}
+	
+	set this_starttime [list $this_hour $this_minutes $this_seconds $this_milliseconds]
+	
+	
 	if {[string first " - " $this_title] > 0} {
 		set this_artist [string range $this_title 0 [string first " - " $this_title]]
 		set this_title [string range $this_title [expr [string first " - " $this_title] +3] end]
