@@ -142,7 +142,7 @@ for { set i 0 } { $i < [llength $tracklist] } { incr i } {
 	set this_hour 0
 	set this_minutes [lindex $this_starttime 0]
 	set this_seconds [lindex $this_starttime 1]
-	set this_milliseconds [expr round ([lindex $this_starttime 2] / 0.075)]
+	set this_milliseconds [expr round ([string trimleft [lindex $this_starttime 2] "0"] / 0.075)]
 	
 	while { $this_minutes >= 60 } {
 		incr this_hour
