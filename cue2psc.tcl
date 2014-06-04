@@ -126,7 +126,7 @@ for { set i 0 } { $i < [llength $tracklist] } { incr i } {
 	
 	
 	
-	set this_indexline [regexp -inline {\n\s*INDEX \d+\s+(\d\d\:\d\d(\:\d\d)?)} $thistrack]
+	set this_indexline [regexp -inline {\n\s*INDEX \d+\s+(\d+\:\d\d(\:\d\d)?)} $thistrack]
 	if {[llength $this_indexline] > 1} {
 		set this_starttime [lindex $this_indexline 1]
 	} else {
