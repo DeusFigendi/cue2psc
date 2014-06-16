@@ -132,7 +132,12 @@ for { set i 0 } { $i < [llength $tracklist] } { incr i } {
 	} else {
 		set this_starttime "00:00:00"
 	}
+	
+	#puts $this_starttime
+	
 	set this_starttime [regexp -inline -all {\d+} $this_starttime]
+	
+	#puts $this_starttime
 	
 	# should be an array of…
 	# { minutes seconds frames }
@@ -142,7 +147,13 @@ for { set i 0 } { $i < [llength $tracklist] } { incr i } {
 	set this_hour 0
 	set this_minutes [lindex $this_starttime 0]
 	set this_seconds [lindex $this_starttime 1]
-	set this_milliseconds [expr round ([string trimleft [lindex $this_starttime 2] "0"] / 0.075)]
+	set this_milliseconds [lindex $this_starttime 2]
+	if { $this_milliseconds == "00" } {
+		set this_milliseconds 0
+	} else {
+		set this_milliseconds [string trimleft $this_milliseconds "0"]
+	}
+	set this_milliseconds [expr round ($this_milliseconds / 0.075)]
 	
 	while { $this_minutes >= 60 } {
 		incr this_hour
